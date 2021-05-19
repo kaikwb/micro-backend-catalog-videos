@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class Genre extends Model
 {
@@ -12,6 +13,10 @@ class Genre extends Model
     protected $fillable = ['name', 'is_active'];
     protected $dates = ['deleted_at'];
     protected $casts = [
-        'id' => 'string'
+        'id' => 'string',
+        'is_active' => 'boolean'
     ];
+
+    protected $keyType = 'string';
+    public $incrementing = false;
 }
