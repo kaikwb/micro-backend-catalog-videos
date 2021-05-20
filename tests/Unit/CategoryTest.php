@@ -3,26 +3,31 @@
 namespace Tests\Unit;
 
 use App\Models\Category;
-use PHPUnit\Framework\TestCase;
+use App\Models\Genre;
+use Tests\TestCase;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Traits\Uuid;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class CategotyTest extends TestCase
+class CategoryTest extends TestCase
 {
-    public function testFillableAttribute()
-    {
-        $fillable = ['name', 'description', 'is_active'];
-        $category = new Category();
-        $this->assertEquals($fillable, $category->getFillable());
-    }
+    use DatabaseMigrations;
 
     public function testIfUseTraits()
     {
+        Genre::create(['name' => 'test']);
         $traits = [
             SoftDeletes::class, Uuid::class
         ];
         $categoryTraits = array_keys(class_uses(Category::class));
         $this->assertEquals($traits, $categoryTraits);
+    }
+
+    public function testFillableAttribute()
+    {
+        $fillable = ['name', 'description', 'is_active'];
+        $category = new Category();
+        $this->assertEquals($fillable, $category->getFillable());
     }
 
     public function testCastsAttribute()
