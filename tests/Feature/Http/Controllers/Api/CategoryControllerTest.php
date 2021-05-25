@@ -178,4 +178,23 @@ class CategoryControllerTest extends TestCase
                     'description' => null
                 ]);
     }
+
+    public function testDelete()
+    {
+        $category = factory(Category::class)->create([
+            'description' => 'description',
+            'is_active' => false
+        ]);
+        $id = $category->id;
+
+        $response = $this->json(
+            'DELETE',
+            route('categories.destroy', ['category' => $id])
+        );
+
+        $category = Category::find($id);
+
+        $response->assertStatus(204);
+        $this->assertNull($category);
+    }
 }
