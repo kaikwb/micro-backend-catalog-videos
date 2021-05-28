@@ -19,6 +19,9 @@ jobs:
       - name: Start container
         run: docker-compose up -d
 
+      - name: Get logs
+        run: docker-compose logs app
+
       - name: Get up containers
         run: docker-compose ps
 
