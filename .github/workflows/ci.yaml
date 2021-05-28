@@ -20,4 +20,4 @@ jobs:
         run: docker-compose up -d
 
       - name: Run tests
-        run: docker-compose exec vendor/bin/phpunit
+        run: docker-compose exec app ./vendor/bin/phpunit
