@@ -3,7 +3,10 @@ version: '3'
 services:
 
     app:
-        build: .
+        build:
+            context: .
+            args:
+                - _USERGROUP=${_USERGROUP-1000}
         container_name: micro-videos-app
         entrypoint: dockerize -template ./.docker/app/.env:.env -template ./.docker/app/.env.testing:.env.testing -wait tcp://db:3306 -timeout 600s ./.docker/entrypoint.sh
         environment:
@@ -35,7 +38,10 @@ services:
             - app
 
     db:
-        build: ./.docker/mysql
+        build:
+            context: ./.docker/mysql
+            args:
+                - _USERGROUP=${_USERGROUP-1000}
         container_name: micro-videos-db
         restart: always
         tty: true

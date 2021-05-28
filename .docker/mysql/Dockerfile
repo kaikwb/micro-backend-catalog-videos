@@ -1,3 +1,5 @@
 FROM mysql:5.7
 
-RUN usermod -u 1000 mysql
+ARG _USERGROUP
+
+RUN usermod -u ${_USERGROUP} mysql
