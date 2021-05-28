@@ -21,3 +21,6 @@ jobs:
 
       - name: Run tests
         run: docker-compose exec app ./vendor/bin/phpunit
+
+      - name: Get logs
+        run: docker-compose logs
