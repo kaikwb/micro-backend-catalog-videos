@@ -26,6 +26,7 @@ jobs:
         run: docker-compose up -d
 
       - name: Get logs
+        if: always()
         run: docker-compose logs app
 
       - name: Get up containers
