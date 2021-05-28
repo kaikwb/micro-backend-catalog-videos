@@ -5,8 +5,6 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      _USERGROUP: $(id -g)
 
     steps:
       - name: Git checkout
@@ -17,6 +15,9 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Set usergroup
+        run: export _USERGROUP=$(id -g)
 
       - name: Print usergroup
         run: echo ${_USERGROUP}
