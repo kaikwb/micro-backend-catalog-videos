@@ -44,7 +44,9 @@ class VideoControllerTest extends TestCase
             'description' => '',
             'year_launched' => '',
             'rating' => '',
-            'duration' => ''
+            'duration' => '',
+            'categories_id' => '',
+            'genres_id' => ''
         ];
 
         $this->assertInvalidationInStoreAction($data, 'required');
@@ -99,6 +101,36 @@ class VideoControllerTest extends TestCase
 
         $this->assertInvalidationInStoreAction($data, 'in');
         $this->assertInvalidationInUpdateAction($data, 'in');
+    }
+
+    public function testInvalidationCategoriesIdField()
+    {
+        $data = [
+            'categories_id' => 'a'
+        ];
+        $this->assertInvalidationInStoreAction($data, 'array');
+        $this->assertInvalidationInUpdateAction($data, 'array');
+
+        $data = [
+            'categories_id' => [100]
+        ];
+        $this->assertInvalidationInStoreAction($data, 'exists');
+        $this->assertInvalidationInUpdateAction($data, 'exists');
+    }
+
+    public function testInvalidationGenresIdField()
+    {
+        $data = [
+            'categories_id' => 'a'
+        ];
+        $this->assertInvalidationInStoreAction($data, 'array');
+        $this->assertInvalidationInUpdateAction($data, 'array');
+
+        $data = [
+            'categories_id' => [100]
+        ];
+        $this->assertInvalidationInStoreAction($data, 'exists');
+        $this->assertInvalidationInUpdateAction($data, 'exists');
     }
 
     public function testSave()
