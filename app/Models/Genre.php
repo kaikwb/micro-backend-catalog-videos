@@ -19,4 +19,9 @@ class Genre extends Model
 
     protected $keyType = 'string';
     public $incrementing = false;
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class)->withTrashed();
+    }
 }
