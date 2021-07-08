@@ -16,7 +16,7 @@ class GenresHasCategoriesRule implements Rule
     /**
      * @var array
      */
-    private $genreId;
+    private $genresId;
 
     /**
      * Create a new rule instance.
@@ -50,10 +50,10 @@ class GenresHasCategoriesRule implements Rule
             }
             array_push($categoriesFound, ...$rows->pluck('category_id')->toArray());
         }
-        if (count($categoriesFound) !== count ($this->catedoriesId)) {
+        if (count($categoriesFound) !== count ($this->categoriesId)) {
             return false;
         }
-        return false;
+        return true;
     }
 
     protected function getRows($genreId): Collection
